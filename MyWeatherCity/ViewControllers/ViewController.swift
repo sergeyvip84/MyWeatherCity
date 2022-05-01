@@ -55,7 +55,6 @@ class ViewController: UIViewController {
     }
 }
 
-
 // MARK: - CLLocationManagerDelegate
 
 extension ViewController: CLLocationManagerDelegate {
