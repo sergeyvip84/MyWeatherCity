@@ -213,7 +213,7 @@
                         <outlet property="feelsLikeTemperatureLabel" destination="HK6-2x-Gtw" id="Jfr-BH-aHu"/>
                         <outlet property="humidityLabel" destination="D8J-hJ-oZ3" id="d9y-Yc-aRd"/>
                         <outlet property="imageBackground" destination="FmN-hD-aZX" id="Si3-gd-edM"/>
-                        <outlet property="pressureLabel" destination="HDf-Ib-sbl" id="uBJ-Cd-b7x"/>
+                        <outlet property="pressureLabel" destination="zdr-NW-dEL" id="nU9-ba-z73"/>
                         <outlet property="sunRiceLabel" destination="ehc-wX-i6F" id="7tx-GM-yDl"/>
                         <outlet property="sunSetLabel" destination="6zO-up-4Pu" id="MkG-AD-b2b"/>
                         <outlet property="temperatureLabel" destination="uJD-2v-XLx" id="xRg-48-MEH"/>
