@@ -15,6 +15,11 @@ struct CurrentWeather {
         return String(format: "%.1f", temperature)
     }
     
+    let sunriseCity: Int
+    let sunsetCity: Int
+    let pressureCity: Int
+    let humidityCity: Int
+    
     let feelsLikeTemperature: Double
     var feelsLikeTemperatureString: String {
         return String(format: "%.1f", feelsLikeTemperature)
@@ -39,5 +44,9 @@ struct CurrentWeather {
         temperature = currentWeatherData.main.temp
         feelsLikeTemperature = currentWeatherData.main.feelsLike
         conditionCode = currentWeatherData.weather.first!.id
+        sunriseCity = currentWeatherData.sys.sunrise
+        sunsetCity = currentWeatherData.sys.sunset
+        pressureCity = currentWeatherData.main.pressure
+        humidityCity = currentWeatherData.main.humidity
     }
 }

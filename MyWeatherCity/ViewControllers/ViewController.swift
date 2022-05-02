@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var imageBackground: UIImageView!
     @IBOutlet weak var feelsLikeTemperatureLabel: UILabel!
+    @IBOutlet weak var pressureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var sunRiceLabel: UILabel!
+    @IBOutlet weak var sunSetLabel: UILabel!
     
     var networkWeatherManager = NetworkWeatherManager()
     lazy var locationManager: CLLocationManager = {
@@ -48,11 +52,25 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             self.cityLabel.text = weather.cityName
             self.temperatureLabel.text = weather.temperatureString
-            self.feelsLikeTemperatureLabel.text = weather.feelsLikeTemperatureString
+            self.feelsLikeTemperatureLabel.text = weather.feelsLikeTemperatureString  + "°C"
             self.weatherIconImageView.image = UIImage(systemName: weather.systemIconNameString[0])
             self.imageBackground.image = UIImage(named: weather.systemIconNameString[1])
+            self.sunRiceLabel.text = convertDateTime(timeValue: weather.sunriseCity)
+            self.sunSetLabel.text = convertDateTime(timeValue: weather.sunsetCity)
+            self.humidityLabel.text = String(weather.humidityCity)  + "°%"
+            self.pressureLabel.text = String(weather.pressureCity)  + "°hPa"
         }
     }
+}
+
+func convertDateTime(timeValue: Int) -> String {
+    let truncatedTime = Int(timeValue)
+    let date = Date(timeIntervalSince1970: TimeInterval(truncatedTime))
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(abbreviation: "GMT+8")
+    formatter.dateFormat = "dd/MM/yyyy hh:mm a"
+
+    return formatter.string(from: date)
 }
 
 // MARK: - CLLocationManagerDelegate
