@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var sunRiceLabel: UILabel!
     @IBOutlet weak var sunSetLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     var networkWeatherManager = NetworkWeatherManager()
     lazy var locationManager: CLLocationManager = {
@@ -31,6 +33,7 @@ class ViewController: UIViewController {
     
     @IBAction func searchPressed(_ sender: UIButton) {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { [unowned self] city in
+            activityIndicator.startAnimating()
             self.networkWeatherManager.fetchCurrentWeather(forRequestType: .cityName(city: city))
         }
     }
@@ -46,6 +49,7 @@ class ViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestLocation()
         }
+      
     }
     
     func updateInterfaceWith(weather: CurrentWeather) {
@@ -59,6 +63,7 @@ class ViewController: UIViewController {
             self.sunSetLabel.text = convertDateTime(timeValue: weather.sunsetCity)
             self.humidityLabel.text = String(weather.humidityCity)  + "°%"
             self.pressureLabel.text = String(weather.pressureCity)  + "°hPa"
+            self.activityIndicator.stopAnimating()
         }
     }
 }
@@ -68,7 +73,7 @@ func convertDateTime(timeValue: Int) -> String {
     let date = Date(timeIntervalSince1970: TimeInterval(truncatedTime))
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone(abbreviation: "GMT+8")
-    formatter.dateFormat = "dd/MM/yyyy hh:mm a"
+    formatter.dateFormat = "hh:mm a"
 
     return formatter.string(from: date)
 }
